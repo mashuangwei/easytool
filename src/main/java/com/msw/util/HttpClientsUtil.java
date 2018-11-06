@@ -157,7 +157,8 @@ public class HttpClientsUtil {
      * @param params 上传文件时携带的参数
      * @param path 文件的绝对路径，比如c:/test.jpeg
      */
-    public void doUploadFilePost(String url, Map<String, String> headers, Map<String, String> params, String path){
+    public ResultResponse doUploadFilePost(String url, Map<String, String> headers, Map<String, String> params,
+                                           String path, String encoding){
         HttpPost httpPost = new HttpPost(url);
         MultipartEntityBuilder multipartEntityBuilder = MultipartEntityBuilder.create();
         File file = new File(path);
@@ -177,6 +178,7 @@ public class HttpClientsUtil {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return executeResponse(closeableHttpResponse, encoding);
     }
 
     /**
